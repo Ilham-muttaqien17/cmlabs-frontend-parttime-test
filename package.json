@@ -1,0 +1,50 @@
+{
+  "name": "cmlabs-frontend-parttime-test",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build --dotenv .env",
+    "dev": "nuxt dev --dotenv .env",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "start": "node .output/server/index.mjs"
+  },
+  "dependencies": {
+    "@iconify-json/bxs": "^1.2.3",
+    "@iconify-json/tabler": "^1.2.33",
+    "@nuxt/eslint": "1.15.2",
+    "@nuxt/icon": "2.2.1",
+    "@nuxt/image": "^2.0.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "@vueuse/core": "^14.2.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^1.0.0",
+    "nuxt": "^4.4.2",
+    "radix-vue": "^1.9.17",
+    "shadcn-nuxt": "2.5.3",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.2",
+    "tailwindcss-animate": "^1.0.7",
+    "vue": "^3.5.31",
+    "vue-router": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "prettier": "^3.8.1"
+  },
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": [
+        "current",
+        "linux"
+      ],
+      "cpu": [
+        "current",
+        "x64",
+        "arm64"
+      ]
+    }
+  }
+}

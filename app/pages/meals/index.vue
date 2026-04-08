@@ -82,54 +82,19 @@ watch(
     <!-- Content -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       <template v-if="loading">
-        <div v-for="(_, k) in 9" :key="`skeleton-${k}`" class="relative flex">
-          <UiSkeleton class="w-full h-50 rounded-2xl bg-gray-300 flex justify-center" />
-          <span
-            class="absolute inset-0 text-2xl flex justify-center items-center text-white font-semibold z-20"
-          >
-            Loading...
-          </span>
-        </div>
+        <CardSkeleton v-for="(_, k) in 9" :key="`skeleton-${k}`" />
       </template>
       <template v-else-if="!loading && meals.length === 0">
         <span>No meal found.</span>
       </template>
       <template v-else>
-        <div
+        <CardItem
           v-for="(meal, k) in meals"
           :key="`meal-${k}`"
-          class="relative flex justify-center cursor-pointer transition-all duration-200 hover:scale-105"
-          @click="
-            navigateTo(
-              `/meals/${meal.id}?ingredientName=${ingredientName}&ingredientTitle=${ingredientTitle}&mealTitle=${meal.title}`
-            )
-          "
-        >
-          <!-- Overlay -->
-          <div
-            class="absolute inset-0 z-10 bg-black opacity-50 rounded-2xl flex justify-center items-center"
-          ></div>
-
-          <!-- Title -->
-          <span
-            class="absolute inset-0 text-2xl flex justify-center items-center text-white font-semibold z-20 text-center"
-          >
-            {{ meal.title }}
-          </span>
-
-          <!-- Thumbnail -->
-          <NuxtImg
-            :src="meal.thumbnail"
-            :quality="80"
-            height="200"
-            width="200"
-            class="self-center"
-            v-slot="{ isLoaded, src, imgAttrs }"
-          >
-            <img v-if="isLoaded" v-bind="imgAttrs" :src="src" />
-            <img v-else src="https://placehold.co/200x200" alt="placeholder" />
-          </NuxtImg>
-        </div>
+          :title="meal.title"
+          :path="`/meals/${meal.id}?ingredientName=${ingredientName}&ingredientTitle=${ingredientTitle}&mealTitle=${meal.title}`"
+          :thumbnail="meal.thumbnail"
+        />
       </template>
     </div>
   </div>

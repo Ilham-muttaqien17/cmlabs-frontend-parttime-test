@@ -41,7 +41,9 @@ onMounted(fetchMeals);
         <NuxtIcon name="bxs:cookie" />
       </div>
       <span class="font-semibold text-slate-700 text-center">mealapp API website</span>
-      <h1 class="text-4xl font-semibold text-slate-700 text-center">See All The Delicious Foods</h1>
+      <h1 class="text-3xl sm:text-4xl font-semibold text-slate-700 text-center">
+        See All The Delicious Foods
+      </h1>
     </div>
 
     <div class="w-[90%] mx-auto flex flex-col gap-6">
@@ -61,52 +63,19 @@ onMounted(fetchMeals);
       <!-- Content -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <template v-if="loading">
-          <div v-for="(_, k) in 9" :key="`skeleton-${k}`" class="relative flex">
-            <UiSkeleton class="w-full h-50 rounded-2xl bg-gray-300 flex justify-center" />
-            <span
-              class="absolute inset-0 text-2xl flex justify-center items-center text-white font-semibold z-20"
-            >
-              Loading...
-            </span>
-          </div>
+          <CardSkeleton v-for="(_, k) in 9" :key="`skeleton-${k}`" />
         </template>
         <template v-else-if="!loading && ingredients.length === 0">
           <span>No ingredient found.</span>
         </template>
         <template v-else>
-          <div
+          <CardItem
             v-for="(ingredient, k) in ingredients"
-            :key="`meal-${k}`"
-            class="relative flex justify-center cursor-pointer transition-all duration-200 hover:scale-105"
-            @click="
-              navigateTo(`/meals?ingredientName=${ingredient.name}&ingredientTitle=${ingredient.title}`)
-            "
-          >
-            <!-- Overlay -->
-            <div
-              class="absolute inset-0 z-10 bg-black opacity-50 rounded-2xl flex justify-center items-center"
-            ></div>
-
-            <!-- Title -->
-            <span
-              class="absolute inset-0 text-2xl flex justify-center items-center text-white font-semibold z-20 text-center"
-            >
-              {{ ingredient.title }}
-            </span>
-
-            <!-- Thumbnail -->
-            <NuxtImg
-              :src="ingredient.thumbnail"
-              :quality="80"
-              height="200"
-              width="200"
-              class="self-center"
-              v-slot="{ isLoaded, src, imgAttrs }"
-            >
-              <img v-if="isLoaded" v-bind="imgAttrs" :src="src" />
-              <img v-else src="https://placehold.co/200x200" alt="placeholder" />
-            </NuxtImg>
-          </div>
+            :key="`ingredient-${k}`"
+            :title="ingredient.title"
+            :path="`/meals?ingredientName=${ingredient.name}&ingredientTitle=${ingredient.title}`"
+            :thumbnail="ingredient.thumbnail"
+          />
         </template>
       </div>
     </div>
